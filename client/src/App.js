@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react"
+import {Route, BrowserRouter} from "react-router-dom"
+import MainPage from "./pages/main";
+import Header from "./components/partials/header";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="http://localhost:4000/auth/google"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Sign in with Google
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      name:"hello",
+    };
+  }
+
+  componentDidMount(){
+    
+  }
+
+  render() {
+    
+    return (
+      <BrowserRouter>
+        <Header/>
+        <Route exact path="/" component={MainPage} />
+      </BrowserRouter>
+    )
+  }
 }
 
-export default App;
