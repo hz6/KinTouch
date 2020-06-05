@@ -9,9 +9,12 @@ export default class App extends Component {
     this.state={
       name:"hello",
     };
+    console.log('constructor');
+    
   }
 
-  componentDidMount(){
+  componentDidMount = () => {
+    console.log('component Did Mount');
     
   }
 
