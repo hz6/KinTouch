@@ -1,4 +1,5 @@
 # fullstackproj
-# Project description:
 a web application with similar functionality as twitter
-* tech
+# Project description:
+Application name: KinTouch
+Technique used: React.js Redux Bootstrap Express Node.js
