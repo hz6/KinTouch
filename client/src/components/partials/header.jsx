@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import {connect} from "react-redux";
 
-export default class Header extends Component {
+class Header extends Component {
   constructor(props){
     super(props);
     this.state={};
@@ -9,18 +10,15 @@ export default class Header extends Component {
   componentDidMount = () => {}
 
   renderHeader = () => {
-    const currentUser = "Anthony Zhang";
+    const {currentUser} = this.props;
     switch (currentUser){
       case (null):
         return null;
       case false:
         return (
             <li className="nav-item active">
-              <a className="nav-link" href="/">
+              <a className="nav-link" href="/auth/google">
                 Login
-                <span className="sr-only">
-                  (current)
-                </span>
               </a>
             </li>
         );
@@ -28,12 +26,12 @@ export default class Header extends Component {
         return (
           <div>
             <li className="nav-item">
-              <a className="nav-link" href="/">
+              <a className="nav-link" href="/user">
                 My Posts
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/">
+              <a className="nav-link" href="/auth/logout">
                 Logout
               </a>
             </li>
@@ -68,3 +66,8 @@ export default class Header extends Component {
   }
 }
 
+const mapStatesToProps = (state) => ({
+  currentUser: state.user.currentUser
+})
+
+export default connect(mapStatesToProps)(Header);

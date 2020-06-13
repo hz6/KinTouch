@@ -20,19 +20,20 @@ module.exports = (app) => {
   );
 
   app.get(
-     "/api/current_user",
+     "/auth/current_user",
      (req,res)=>{
-        console.log("api/current_user",req.user);
+        console.log("auth/current_user",req.user);
         res.send(req.user);
      }
      // store user in cookie, every request has the user
   );
 
   app.get(
-    "/api/logout",
+    "/auth/logout",
     (req,res)=>{
       req.logout();
       res.redirect("http://localhost:3000/");
+      // res.send({});
     }
   )
 }
