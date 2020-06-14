@@ -24,7 +24,7 @@ class Header extends Component {
         );
       default:
         return (
-          <div>
+          <div className="row">
             <li className="nav-item">
               <a className="nav-link" href="/user">
                 My Posts
