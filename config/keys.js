@@ -3,6 +3,4 @@ module.exports = {
   googleClientSecret:"ICF1aPrKphyGq2j9YR0p2J3S",
   mongoURI:"mongodb+srv://anthony:10081998@mycluster-h6zet.mongodb.net/anthony_database?retryWrites=true&w=majority",
   cookieKeys:"rtVUI768Vsas8qywdnaI69adsWQfc",
-  myKey:"BHJK234b51iksn2&xsTFV8i"
-
 }
