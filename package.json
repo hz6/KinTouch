@@ -14,15 +14,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.678.0",
+    "axios": "^0.19.2",
     "body-parser": "^1.19.0",
     "concurrently": "^5.2.0",
     "cookie-session": "^1.4.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mongodb": "^3.5.8",
-    "mongoose": "^5.9.16",
-    "nodemon": "^2.0.4",
+    "mongodb": "^3.5.9",
+    "mongoose": "^5.9.13",
+    "nodemon": "^2.0.3",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
-    "react-redux": "^7.2.0"
+    "uuid": "^3.3.2"
   }
 }

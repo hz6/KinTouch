@@ -27,9 +27,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require("./models/user");
+require("./models/post");
 
 require("./services/passport");
 
 require("./routes/authRoutes")(app);
+// require("./routes/postRoutes")(app)
 
 app.listen(4000,()=>console.log('Listeing to port 4000'));
