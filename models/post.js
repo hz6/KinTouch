@@ -8,6 +8,7 @@ const postSchema = new Schema({
   title:String,
   content:String,
   image: String,
+  createAt: Date
 });
 
 mongoose.model("posts",postSchema);

@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const keys = require("../config/keys");
 const AWS = require("aws-sdk");
 const Post = mongoose.model("posts");
+const requireLogin = require("../middlewares/requireLogin");
 const uuid = require("uuid/v1");
 
 const s3 = new AWS.S3({
@@ -11,8 +12,12 @@ const s3 = new AWS.S3({
 })
 
 module.exports = (app) => {
-  app.get("/api/image/upload", async (req,res) => {
+  app.get("/api/image/upload", requireLogin, async (req,res) => {
+    console.log(req.user.id);
+    console.log(uuid());
+       
     const key = `${req.user.id}/${uuid()}.jpeg`;
+
     s3.getSignedUrl(
       "putObject",
       {
@@ -22,5 +27,30 @@ module.exports = (app) => {
       },
       (err,url)=>res.send({ key, err, url })
     );
-  })
+  });
+
+  app.post("/api/post/create", requireLogin, async (req,res) => {
+    console.log(req.body);
+    
+    await Post({
+      userEmail:req.user.email,
+      userName:req.user.username,
+      userId:req.user.id,
+      userPhoto:req.user.image,
+      title:req.body.title,
+      content:req.body.content,
+      image:req.body.key,
+      createAt: new Date(),
+    }).save();
+    res.send({});
+  });
+  app.get("/api/post/all/get", requireLogin, async (req, res)=>{
+    const posts = await Post.find();
+    const currentUser = req.user.id;
+    const userPosts = posts.filter(post => {
+      return post.userId === currentUser;
+    });
+    
+    res.send(userPosts);
+  });
 }

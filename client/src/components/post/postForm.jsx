@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Container, TextField } from "@material-ui/core";
 import axios from "axios";
+import Card from "../../assets/card";
 
 export default class PostForm extends Component {
   constructor(props){
@@ -9,7 +10,7 @@ export default class PostForm extends Component {
       show:false,
       title:"",
       content:"",
-      image:null
+      file:null
     };
   }
 
@@ -21,11 +22,29 @@ export default class PostForm extends Component {
   }
 
   handlePost = async () => {
-    const {image} = this.state;
+    const {file,title,content} = this.state;
+    // request presigned-url(api) from backend server
     const uploadConfig = await axios.get("/api/image/upload");
+    console.log(uploadConfig.data);
+    
     const {url, key} = uploadConfig.data;
-
-
+    // upload to AWS S3
+    if (file) {
+      await axios.put(url, file, {
+        headers:{
+          "Content-type":file.type,
+        },
+      });
+      console.log("upload image");
+      
+    }
+    // save url to our db
+    await axios.post("/api/post/create",{key,title,content});
+    console.log("mongo db save");
+    
+    // refresh page
+    // or use <Link />
+    window.location = "/user";
   }
 
   render() {
@@ -37,8 +56,9 @@ export default class PostForm extends Component {
         </Button>
         {
           show ? 
-          (<div className="jumbotron">
-            <h3>New Post</h3>
+          (<div className="jumbotron row">
+            <div className="col-5">
+              <h3>New Post</h3>
             <hr/>
             <Container>
               <TextField
@@ -64,7 +84,7 @@ export default class PostForm extends Component {
               <input
                 type="file"
                 accept="image/*"
-                onChange={(event)=>this.setState({image : event.target.files[0]})}
+                onChange={(event)=>this.setState({file : event.target.files[0]})}
               />
               <br/>
               <br/>
@@ -72,6 +92,13 @@ export default class PostForm extends Component {
                 Post
               </Button>
             </Container>
+            </div>
+            <div className="col-7">
+              <Card 
+                title={this.state.title}
+                content={this.state.content}
+              />
+            </div>
           </div>):null
         }
       </div>

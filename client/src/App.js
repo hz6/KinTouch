@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import {Route, BrowserRouter} from "react-router-dom"
 import MainPage from "./pages/main";
+import UserPage from "./pages/user";
 import Header from "./components/partials/header";
 import {setCurrentUser} from "./redux/user/actions";
 import axios from "axios";
@@ -16,7 +17,7 @@ class App extends Component {
 
   componentDidMount = async () => {
     const user = await axios.get("/auth/current_user");
-    this.props.setCurrentUser(user.data);//接了data才是真正后端传过来的数据值
+    this.props.setCurrentUser(user.data);
   }
 
   render() {
@@ -25,6 +26,7 @@ class App extends Component {
       <BrowserRouter>
         <Header/>
         <Route exact path="/" component={MainPage} />
+        <Route exact path="/user" component={UserPage} />
       </BrowserRouter>
     )
   }
