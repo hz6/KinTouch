@@ -4,6 +4,7 @@ const AWS = require("aws-sdk");
 const Post = mongoose.model("posts");
 const requireLogin = require("../middlewares/requireLogin");
 const uuid = require("uuid/v1");
+const { default: Axios } = require("axios");
 
 const s3 = new AWS.S3({
   accessKeyId:keys.AWSKeyId,
@@ -44,7 +45,8 @@ module.exports = (app) => {
     }).save();
     res.send({});
   });
-  app.get("/api/post/all/get", requireLogin, async (req, res)=>{
+   
+  app.get("/api/post/user/get", requireLogin, async (req, res)=>{
     const posts = await Post.find();
     const currentUser = req.user.id;
     const userPosts = posts.filter(post => {
@@ -52,5 +54,10 @@ module.exports = (app) => {
     });
     
     res.send(userPosts);
+  });
+
+  app.get("/api/post/all/get", async (req,res)=>{
+    const posts = await Post.find();
+    res.send(posts);
   });
 }

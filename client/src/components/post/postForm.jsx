@@ -48,11 +48,12 @@ export default class PostForm extends Component {
   }
 
   render() {
-    const {show,title,content} = this.state;
+    const { show, title, content } = this.state;
+    const postPreview = { title:title,content:content };
     return (
       <div>
-        <Button variant={show?"outlined":"contained"} color={show?"secondary":"primary"} onClick={this.showMainContent}>
-          {show? "Cancel":"New Post"}
+        <Button variant={show ? "outlined":"contained"} color={show ? "secondary":"primary"} onClick={this.showMainContent}>
+          {show ? "Cancel":"New Post"}
         </Button>
         {
           show ? 
@@ -88,17 +89,18 @@ export default class PostForm extends Component {
               />
               <br/>
               <br/>
-              <Button variant="contained" color="primary" onClick={this.handlePost}>
+              <Button  variant="contained" color="primary" onClick={this.handlePost}>
                 Post
               </Button>
             </Container>
             </div>
             <div className="col-7">
+              <p>Preview of your post</p>
               <Card 
-                title={this.state.title}
-                content={this.state.content}
+                post={postPreview}
               />
             </div>
+            
           </div>):null
         }
       </div>

@@ -43,7 +43,7 @@ class Header extends Component {
   render() {
     
     return (
-      <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
+      <nav className="navbar navbar-dark bg-primary navbar-expand-lg">
         
         <a className="navbar-brand" href="/">KinTouch</a>
         
@@ -53,9 +53,9 @@ class Header extends Component {
           data-toggle="collapse" 
           data-target="#navbarNav" 
           aria-controls="navbarNav" 
-          aria-expanded="false" 
+          aria-expanded="true"
           aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon" ></span>
         </button>
 
         <div className="collapse navbar-collapse" id="navbarNav">

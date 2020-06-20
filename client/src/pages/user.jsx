@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Card from "../assets/card"
-import keys from "../assets/keys"
 import { Container, CircularProgress } from '@material-ui/core';
 import axios from "axios";
 
@@ -13,9 +12,8 @@ export default class UserPage extends Component {
   }
 
   componentDidMount = async () => {
-    console.log("getting doc");
-    const doc = await axios.get("/api/post/all/get");
-    console.log("getting doc success");
+    console.log("getting doc from: /api/post/user/get");
+    const doc = await axios.get("/api/post/user/get");
     console.log(doc.data);
     this.setState({postData:doc.data});
   }
@@ -23,30 +21,29 @@ export default class UserPage extends Component {
   render() {
     const {postData} = this.state;
     
-    
     return (
-      <div className="col-6">
-        
-        <Container style={{marginTop:20}}>
-          <h1> My Posts </h1>
-        </Container>
-        
-          <Container style={{marginTop:25}}>
-            {
-              postData.length !== 0 ?
-              postData.map((post, index) => 
-                <Card 
-                  key={index} 
-                  url={keys.AWS + post.image} 
-                  title={post.title}
-                  content={post.content}
-                  avatar={post.userPhoto}
-                  time={post.createAt}
-                />)
-                : <CircularProgress />
-            }
+      <div className="col">
+        <div className="row" style={{margin:10}}>
+          <Container>
+            <h1> My Posts </h1>
           </Container>
-          
+        </div>
+        <div className="row" style={{margin:10}}>
+          {
+            postData.length !== 0 ?
+            postData.map((post, index) => { 
+              return <Card key={index} post={post} style={{margin:10}} />
+            }
+            ) : (
+              <div>
+                <h4>You don't have posts yet.</h4>
+                <CircularProgress />
+              </div>
+            )
+          }  
+        </div>
+        
+ 
       </div>
     )
   }

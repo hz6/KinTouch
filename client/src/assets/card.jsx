@@ -13,10 +13,11 @@ import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { CardActionArea } from '@material-ui/core';
-
+import Keys from "../assets/keys";
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
+    margin:5
   },
   media: {
     height: 0,
@@ -47,28 +48,28 @@ export default function RecipeReviewCard(props) {
 
   return (
     <Card className={classes.root}>
-    <CardActionArea onClick={props.addOne} >
+    <CardActionArea >
     <CardHeader
         avatar={
-          <Avatar className={classes.avatar} src={props.avatar}/>
+          <Avatar className={classes.avatar} src={props.post.userPhoto}/>
         }
         action={
           <IconButton aria-label="settings">
             <MoreVertIcon />
           </IconButton>
         }
-        title={props.title}
-        subheader={props.time}
+        title={props.post.title}
+        subheader={props.post.createAt}
       />
       <CardMedia
         className={classes.media}
-        image={props.url}
-        title="Paella dish"
-      /></CardActionArea>
+        image={Keys.AWS + props.post.image}
+        title="Paella dish"/>
+      </CardActionArea>
       
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          {props.content}
+          {props.post.content}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -81,9 +82,7 @@ export default function RecipeReviewCard(props) {
           })}
           onClick={handleExpandClick}
           aria-expanded={expanded}
-          aria-label="show more"
-        >
-          {/* <ExpandMoreIcon /> */}
+          aria-label="show more">
         </IconButton>
       </CardActions>
       {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
