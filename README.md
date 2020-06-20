@@ -1,4 +1,4 @@
-# fullstackproj
+# KinTouch
 a web application with similar functionality as twitter
 # Project description:
 * Application name: KinTouch
