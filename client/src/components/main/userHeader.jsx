@@ -7,15 +7,15 @@ class UserHeader extends Component {
   render() {
     return (
       <div className="jumbotron">
-        
-        <h1> Hello, Welcome to KinTouch </h1>
-
         <Card>
           <CardContent>
             <div className="row">
               
               <div className="col-3">
-                <Avatar src={this.props.currentUser.image} style={{height:100, width:100, margin:5}} />
+                <Avatar 
+                  src={this.props.currentUser.image} 
+                  style={{height:100, width:100, margin:5}} 
+                />
               </div>
               
               <div className="col-9">

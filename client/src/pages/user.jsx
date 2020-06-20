@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Card from "../assets/card"
-import { Container, CircularProgress } from '@material-ui/core';
+import {connect} from "react-redux";
+import {  CircularProgress } from '@material-ui/core';
 import axios from "axios";
 
-export default class UserPage extends Component {
+class UserPage extends Component {
   constructor(props){
     super(props);
     this.state={
@@ -14,6 +15,7 @@ export default class UserPage extends Component {
   componentDidMount = async () => {
     console.log("getting doc from: /api/post/user/get");
     const doc = await axios.get("/api/post/user/get");
+    if (doc.data.err) { return null; } // No user detected
     console.log(doc.data);
     this.setState({postData:doc.data});
   }
@@ -24,19 +26,19 @@ export default class UserPage extends Component {
     return (
       <div className="col">
         <div className="row" style={{margin:10}}>
-          <Container>
+          
             <h1> My Posts </h1>
-          </Container>
+          
         </div>
         <div className="row" style={{margin:10}}>
           {
             postData.length !== 0 ?
             postData.map((post, index) => { 
-              return <Card key={index} post={post} style={{margin:10}} />
+              return <Card key={index} post={post} style={{margin:10}} showDelete={true} />
             }
             ) : (
               <div>
-                <h4>You don't have posts yet.</h4>
+                <h4>No posts yet.</h4>
                 <CircularProgress />
               </div>
             )
@@ -49,3 +51,8 @@ export default class UserPage extends Component {
   }
 }
 
+const mapStatesToProps = (state) => ({
+  currentUser: state.user.currentUser
+})
+
+export default connect(mapStatesToProps)(UserPage);

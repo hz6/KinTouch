@@ -11,7 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import { CardActionArea, Collapse } from '@material-ui/core';
+import { CardActionArea, Collapse, Button } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Keys from "../assets/keys";
 
@@ -65,6 +65,9 @@ export default function RecipeReviewCard(props) {
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
+        {
+          props.showDelete ? (<Button color="secondary"> Delete </Button>):(null)
+        }
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,

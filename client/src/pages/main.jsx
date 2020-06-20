@@ -47,7 +47,7 @@ class MainPage extends Component {
               {
                 allPosts.length !==0 ?
                 allPosts.map((post,index) => {
-                  return <Card post={post} />
+                  return <Card post={post} showDelete={false} />
                 }):(<CircularProgress/>)
               }
             </div>

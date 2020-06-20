@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Skeleton from "@material-ui/lab/Skeleton";
 
-
 class NoUserHeader extends Component {
   render() {
     return (

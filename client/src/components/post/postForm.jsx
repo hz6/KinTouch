@@ -36,7 +36,6 @@ export default class PostForm extends Component {
         },
       });
       console.log("upload image");
-      
     }
     // save url to our db
     await axios.post("/api/post/create",{key,title,content});
