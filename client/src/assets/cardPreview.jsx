@@ -11,9 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import { CardActionArea, Collapse } from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Keys from "../assets/keys";
+import { CardActionArea } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,19 +46,25 @@ export default function RecipeReviewCard(props) {
 
   return (
     <Card className={classes.root}>
-      <CardActionArea >
-        <CardHeader
-          avatar={<Avatar className={classes.avatar} src={props.post.userPhoto}/>}
-          title={props.post.title}
-          subheader={props.post.createAt}
-        />
-        <CardMedia
-          className={classes.media}
-          image={Keys.AWS + props.post.image}
-          title="Paella dish"/>
+    <CardActionArea >
+    <CardHeader
+        avatar={
+          <Avatar className={classes.avatar} src={props.post.userPhoto}/>
+        }
+        
+        title={props.post.title}
+        subheader={props.post.createAt}
+      />
+      <CardMedia
+        className={classes.media}
+        title="Paella dish"/>
       </CardActionArea>
       
-      
+      <CardContent>
+        <Typography variant="body2" color="textSecondary" component="p">
+          {props.post.content}
+        </Typography>
+      </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
@@ -72,15 +76,8 @@ export default function RecipeReviewCard(props) {
           onClick={handleExpandClick}
           aria-expanded={expanded}
           aria-label="show more">
-          <ExpandMoreIcon />
         </IconButton>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>Details:</Typography>
-            {props.post.content}
-        </CardContent>
-      </Collapse>
     </Card>
   );
 }

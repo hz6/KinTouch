@@ -4,7 +4,6 @@ const AWS = require("aws-sdk");
 const Post = mongoose.model("posts");
 const requireLogin = require("../middlewares/requireLogin");
 const uuid = require("uuid/v1");
-const { default: Axios } = require("axios");
 
 const s3 = new AWS.S3({
   accessKeyId:keys.AWSKeyId,
@@ -14,9 +13,7 @@ const s3 = new AWS.S3({
 
 module.exports = (app) => {
   app.get("/api/image/upload", requireLogin, async (req,res) => {
-    console.log(req.user.id);
-    console.log(uuid());
-       
+
     const key = `${req.user.id}/${uuid()}.jpeg`;
 
     s3.getSignedUrl(

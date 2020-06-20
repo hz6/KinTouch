@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Container, TextField } from "@material-ui/core";
 import axios from "axios";
-import Card from "../../assets/card";
+import CardPreview from "../../assets/cardPreview";
 
 export default class PostForm extends Component {
   constructor(props){
@@ -96,7 +96,7 @@ export default class PostForm extends Component {
             </div>
             <div className="col-7">
               <p>Preview of your post</p>
-              <Card 
+              <CardPreview
                 post={postPreview}
               />
             </div>
