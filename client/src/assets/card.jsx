@@ -66,7 +66,12 @@ export default function RecipeReviewCard(props) {
           <FavoriteIcon />
         </IconButton>
         {
-          props.showDelete ? (<Button color="secondary"> Delete </Button>):(null)
+          props.showDelete ? 
+          (
+            <Button color="secondary" variant="outlined" onClick={()=>props.handleDelete()}>Delete</Button>
+            ) : (
+              null
+              )
         }
         <IconButton
           className={clsx(classes.expand, {

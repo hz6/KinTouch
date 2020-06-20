@@ -20,21 +20,31 @@ class UserPage extends Component {
     this.setState({postData:doc.data});
   }
 
+  handleDelete = async (postId) => {
+    await axios.post("/api/post/delete/" + postId);
+    window.location="/user";
+  }
+
   render() {
     const {postData} = this.state;
     
     return (
       <div className="col">
         <div className="row" style={{margin:10}}>
-          
-            <h1> My Posts </h1>
-          
+          <h1> My Posts </h1>
         </div>
         <div className="row" style={{margin:10}}>
           {
             postData.length !== 0 ?
             postData.map((post, index) => { 
-              return <Card key={index} post={post} style={{margin:10}} showDelete={true} />
+              return (
+                <Card 
+                  key={index} 
+                  post={post} 
+                  style={{margin:10}} 
+                  showDelete={true} 
+                  handleDelete={() => this.handleDelete(post._id)} />
+              );
             }
             ) : (
               <div>

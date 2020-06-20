@@ -28,7 +28,6 @@ module.exports = (app) => {
   });
 
   app.post("/api/post/create", requireLogin, async (req,res) => {
-    console.log(req.body);
     
     await Post({
       userEmail:req.user.email,
@@ -40,6 +39,12 @@ module.exports = (app) => {
       image:req.body.key,
       createAt: new Date(),
     }).save();
+    res.send({});
+  });
+
+  app.post("/api/post/delete/:id", requireLogin, async (req,res) => {
+    const postId = req.params.id;
+    await Post.findByIdAndDelete(postId);
     res.send({});
   });
    

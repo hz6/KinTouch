@@ -37,13 +37,15 @@ export default class PostForm extends Component {
       });
       console.log("upload image");
     }
-    // save url to our db
-    await axios.post("/api/post/create",{key,title,content});
-    console.log("mongo db save");
-    
-    // refresh page
-    // or use <Link />
-    window.location = "/user";
+    if(title && content){
+      // save url to our db
+      await axios.post("/api/post/create",{key,title,content});
+      console.log("mongo db save");
+      
+      // refresh page
+      // or use <Link />
+      window.location = "/user";
+    }
   }
 
   render() {
