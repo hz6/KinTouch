@@ -23,6 +23,8 @@ passport.use(
   // 这个 callback 函数作用于google-strategy
   async (accessToken, refreshToken, profile, callback)=>{
     try{
+      console.log("accessToken:",accessToken);
+      console.log("refreshToken:",refreshToken);
       console.log("profile:",profile);
       const document = await userData.findOne({googleId: profile.id});
       if (document) {
