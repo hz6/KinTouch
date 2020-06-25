@@ -28,6 +28,7 @@ app.use(passport.session());
 
 require("./models/user");
 require("./models/post");
+require("./models/comment");
 
 require("./services/passport");
 

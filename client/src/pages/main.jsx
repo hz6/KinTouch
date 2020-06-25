@@ -35,9 +35,10 @@ class MainPage extends Component {
     const {allPosts} = this.state;
     return (
       <div>
-        <div className="col-12" >
+        <div className="col-12" style={{marginTop:20}}>
           {this.renderHeader()}
         </div>
+        <hr style={{margin:5}} />
         <div>
           <Container>
             {
@@ -48,10 +49,14 @@ class MainPage extends Component {
                 allPosts.length !==0 ?
                 allPosts.map((post,index) => {
                   return <Card post={post} showDelete={false} />
-                }):(<CircularProgress/>)
+                })
+                :
+                (<CircularProgress/>)
               }
             </div>
-            ):(
+            )
+            :
+            (
               <div>
                 <h4>No posts yet.</h4>
                 <CircularProgress />

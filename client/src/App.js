@@ -2,7 +2,9 @@ import React, { Component } from "react"
 import {Route, BrowserRouter} from "react-router-dom"
 import MainPage from "./pages/main";
 import UserPage from "./pages/user";
+import DetailPage from "./pages/details";
 import Header from "./components/partials/header";
+import Footer from "./components/partials/footer";
 import {setCurrentUser} from "./redux/user/actions";
 import axios from "axios";
 import {connect} from "react-redux";
@@ -27,6 +29,8 @@ class App extends Component {
         <Header/>
         <Route exact path="/" component={MainPage} />
         <Route exact path="/user" component={UserPage} />
+        <Route path="/post/:id" component={DetailPage} />
+        <Footer/>
       </BrowserRouter>
     )
   }

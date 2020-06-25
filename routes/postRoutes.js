@@ -62,4 +62,10 @@ module.exports = (app) => {
     const posts = await Post.find();
     res.send(posts);
   });
+
+  app.get("/api/post/getone/:id", async (req,res)=>{
+    const postId = req.params.id;
+    const post =  await Post.findById(postId);
+    res.send(post);
+  });
 }

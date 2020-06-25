@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Card from "../assets/card"
 import {connect} from "react-redux";
-import {  CircularProgress } from '@material-ui/core';
+import {  CircularProgress, Avatar } from '@material-ui/core';
 import axios from "axios";
 
 class UserPage extends Component {
@@ -15,7 +15,7 @@ class UserPage extends Component {
   componentDidMount = async () => {
     console.log("getting doc from: /api/post/user/get");
     const doc = await axios.get("/api/post/user/get");
-    if (doc.data.err) { return null; } // No user detected
+    if (doc.data.err) { return null; }
     console.log(doc.data);
     this.setState({postData:doc.data});
   }
@@ -25,14 +25,26 @@ class UserPage extends Component {
     window.location="/user";
   }
 
+  renderAvatar(){
+    const {currentUser} = this.props;
+    if (currentUser) {
+      console.log("current user:",currentUser);
+      return <Avatar src={currentUser.image} style={{margin:10, height:130, width:130}} />;
+    } else {
+      return <CircularProgress />;
+    }
+  }
+
   render() {
     const {postData} = this.state;
     
     return (
       <div className="col">
-        <div className="row" style={{margin:10}}>
-          <h1> My Posts </h1>
+        <div className="row jumbotron" style={{margin:15}}>
+          {this.renderAvatar()}
+          <h1 style={{margin:40}}> My Posts </h1>
         </div>
+        <hr/>
         <div className="row" style={{margin:10}}>
           {
             postData.length !== 0 ?
@@ -54,8 +66,6 @@ class UserPage extends Component {
             )
           }  
         </div>
-        
- 
       </div>
     )
   }
