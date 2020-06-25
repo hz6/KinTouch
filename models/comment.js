@@ -5,6 +5,7 @@ const commentSchema = new Schema({
   userEmail:String,
   userName:String,
   userId:String,
+  userPhoto:String,
   content:String,
   createAt:Date,
 });

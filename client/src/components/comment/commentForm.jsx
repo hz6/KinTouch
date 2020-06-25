@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Container, TextField } from "@material-ui/core";
+import Axios from 'axios';
 
 export default class CommentForm extends Component {
   constructor(props){
@@ -17,8 +18,13 @@ export default class CommentForm extends Component {
     this.setState({show:!show});
   }
 
-  handlePost = async () => {  
-    window.location = "/post"+this.props.match.params.id;
+  handleComment = async () => {
+    const {content} = this.state;
+    const postId = this.props.postId;
+    if (content) {
+      await Axios.post("/api/comment/create", { content, postId });
+      window.location = "/post/" + this.props.postId;
+    }
   }
 
   render() {
@@ -35,18 +41,13 @@ export default class CommentForm extends Component {
               <h3> New Comment </h3>
               <hr/>
               <Container>
-                <br/>
-                <TextField
-                  id="standard-multiline-static"
-                  label="Content"
+                <TextField id="standard-multiline-static" label="Content"
                   multiline
-                  rows={4}
-                  style={{width:300}}
-                  value={content}
-                  onChange={(event)=>this.setState({content : event.target.value})}
+                  rows={3}
+                  style={{width:300}} value={content} onChange={(event)=>this.setState({content : event.target.value})}
                 />
                 <br/>
-                <Button  variant="contained" color="primary" onClick={this.handlePost}>
+                <Button  variant="contained" color="primary" onClick={this.handleComment} style={{marginTop:10}}>
                   Post Comment
                 </Button>
               </Container>

@@ -4,36 +4,48 @@ import {Card, CardContent, Avatar, Typography, CircularProgress, Container} from
 import Keys from "../assets/keys";
 import CommentForm from "../components/comment/commentForm";
 import {connect} from "react-redux";
+import CommentCard from "../components/comment/commentCard";
 
 class DetailPage extends Component {
   constructor(props){
     super(props);
     this.state = {
-      post:null
+      post:null,
+      comments:[]
     };
   }
 
   componentDidMount = async () => {
-    const doc = await axios.get(
-      "/api/post/getone/" + this.props.match.params.id
-    );
-    this.setState({post:doc.data});
+    const doc = await axios.get("/api/post/getone/" + this.props.match.params.id);
+    const docComment = await axios.get("/api/comment/get/"+doc.data._id);
+    
+    this.setState({
+      post:doc.data,
+      comments:docComment.data
+    });
   }
 
-  renderComment = () => {
+  renderCommentForm = () => {
     const {currentUser} = this.props;
+    const {post} = this.state;
     switch (currentUser){
       case null:
         return null;
       case false:
         return <h3> You need to login to comment this post</h3>;
       default:
-        return <CommentForm />;
+        switch (post) {
+          case null:
+            return null;
+          default:
+            return <CommentForm postId={post._id} />;
+      }
+        
     }
   }
 
   render() {
-    const { post } = this.state;
+    const { post, comments } = this.state;
     
     // if not logged in don't show comments
     return (
@@ -54,9 +66,9 @@ class DetailPage extends Component {
                   <Typography style={{margin:10}}>
                     {
                       post ? 
-                      <h3>{post.userName}'s post</h3>
+                      (<h3>{post.userName}'s post</h3>)
                       :
-                      <h3>Oops! post not found</h3>
+                      (<h3>Oops! post not found</h3>)
                     }
                   </Typography>
                 </div>
@@ -82,8 +94,14 @@ class DetailPage extends Component {
           :
           (<CircularProgress/>)
         }
-        <Container style={{marginTop:10}}>
-          {this.renderComment()}
+        <Container style={{marginTop:10}}>{this.renderCommentForm()}</Container>
+        <Container >
+          {
+            comments.length !== 0 ?
+            comments.map(comment => <CommentCard comment={comment} />)
+            :
+            null
+          }
         </Container>
       </div>
     )

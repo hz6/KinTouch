@@ -35,10 +35,9 @@ class MainPage extends Component {
     const {allPosts} = this.state;
     return (
       <div>
-        <div className="col-12" style={{marginTop:20}}>
+        <div className="col-12" style={{marginTop:10}}>
           {this.renderHeader()}
         </div>
-        <hr style={{margin:5}} />
         <div>
           <Container>
             {

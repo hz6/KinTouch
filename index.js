@@ -34,5 +34,7 @@ require("./services/passport");
 
 require("./routes/authRoutes")(app);
 require("./routes/postRoutes")(app)
+require("./routes/commentRoutes")(app);
 
-app.listen(4000,()=>console.log('Listeing to port 4000'));
+const port = 4000;
+app.listen(port,()=>console.log(`Listening to port ${port}`));
