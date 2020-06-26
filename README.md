@@ -12,7 +12,7 @@ A blog  web application with similar functionality as twitter (in an 'open commu
 1. upload photo
 2. comment
 
-## Deployment?
+## Deployment
 
 1. change index.js
 2. Package.json: "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
