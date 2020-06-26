@@ -5,7 +5,7 @@ A blog  web application with similar functionality as twitter (in an 'open commu
 1. Frontend: React, Redux
 2. Backend: NodeJS, ExpressJS
 3. Database: MongoDB
-4. Dev tools: VS code, Postman, 
+4. Dev tools: VS code, Postman, Material-UI, Bootstrap-4 
 
 ## function:
 
