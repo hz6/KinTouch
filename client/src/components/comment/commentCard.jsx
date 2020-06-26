@@ -9,7 +9,6 @@ const useStyles = makeStyles({
   root: {
     maxWidth: "90%",
   },
-
 });
 
 export default function MediaCard(props) {
