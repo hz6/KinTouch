@@ -22,7 +22,7 @@ I created this app for the sake of sharing life experience. Everyone in this com
 3. Keys.js, dev.js, prod.js, .gitignore(/config/dev.js)
 4. search localhost, change them into / (routes, service)
 5. Github repo + create LICENSE
-6. create Heroku project + Connect to github project (Continous Integretion)
+6. create Heroku project + Connect to github project (Continuous Integretion)
 7. Recreate MongoDB (new project), Google oauth (new project), AWS (new user)
 8. set up Heroku => setting => Config Vars
 9. Enable Heroku Automatic Deploys or Manually deploy
