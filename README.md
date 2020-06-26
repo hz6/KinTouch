@@ -1,7 +1,7 @@
 # Project name: KinTouch
 
-A blog  web application with similar functionality as twitter (in an 'open community').
-Inspiration: I created this app for sharing life experience. Everyone in this community can share their experience and we are able to learn from each other by visiting other's posts, help others out and giving advises by leaving comments on their posts. By doing so we are able to develop a great community for sharing!
+This is A blog  web application with similar functionality as twitter (in an 'open community').
+I created this app for sharing life experience. Everyone in this community can share their experience and we are able to learn from each other by visiting other's posts, help others out and giving advises by leaving comments on their posts. By doing so we are able to develop a great community for sharing!
 
 ## Project description:
 
