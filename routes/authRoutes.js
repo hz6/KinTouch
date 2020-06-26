@@ -16,6 +16,7 @@ module.exports = (app) => {
     passport.authenticate("google"),
     (req,res)=>{
       res.redirect("http://localhost:3000/");
+      // res.redirect("/");
     }
   );
 
@@ -25,7 +26,6 @@ module.exports = (app) => {
         console.log("auth/current_user",req.user);
         res.send(req.user);
      }
-     // store user in cookie, every request has the user
   );
 
   app.get(
@@ -33,7 +33,7 @@ module.exports = (app) => {
     (req,res)=>{
       req.logout();
       res.redirect("http://localhost:3000/");
-      // res.send({});
+      // res.redirect("/");
     }
   )
 }
