@@ -12,8 +12,8 @@ I created this app for the sake of sharing life experience. Everyone in this com
 
 ## function:
 
-1. upload photo
-2. comment
+1. upload photo and text content
+2. comment on current post
 
 ## Deployment
 
