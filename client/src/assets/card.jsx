@@ -11,9 +11,10 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import { CardActionArea, Collapse, Button } from '@material-ui/core';
+import { CardActionArea, Collapse } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Keys from "../assets/keys";
+import Dialog from "../assets/dialog";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,8 +60,7 @@ export default function RecipeReviewCard(props) {
           image={Keys.AWS + props.post.image}
           title="Paella dish"/>
       </CardActionArea>
-      
-      
+
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
@@ -68,7 +68,7 @@ export default function RecipeReviewCard(props) {
         {
           props.showDelete ? 
           (
-            <Button color="secondary" variant="outlined" onClick={()=>props.handleDelete()}>Delete</Button>
+            <Dialog handleDelete={props.handleDelete} title={"Delete Post"} />
             ) : (
               null
               )
