@@ -10,7 +10,7 @@ I created this app for the sake of sharing life experience. Everyone in this com
 3. Database: MongoDB
 4. Dev tools: VS code, Postman, Material-UI, Bootstrap-4 
 
-## function:
+## Function:
 
 1. Upload photo and text content
 2. Comment on current post
