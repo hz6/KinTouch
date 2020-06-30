@@ -14,7 +14,11 @@ class MainPage extends Component {
     };
   }
 
-  componentDidMount = async() => {
+  componentDidMount = () => {
+    this.getAllPosts();
+  }
+
+  getAllPosts = async () => {
     const doc = await axios.get("/api/post/all/get");
     this.setState({ allPosts:doc.data });
   }
@@ -47,7 +51,7 @@ class MainPage extends Component {
               {
                 allPosts.length !==0 ?
                 allPosts.map((post,index) => {
-                  return <Card post={post} showDelete={false} />
+                  return <Card key={index} post={post} showDelete={false} />
                 })
                 :
                 (<CircularProgress/>)

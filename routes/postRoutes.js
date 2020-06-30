@@ -44,21 +44,15 @@ module.exports = (app) => {
   app.post("/api/post/delete/:id", requireLogin, async (req,res) => {
     const postId = req.params.id;
     await Post.findByIdAndDelete(postId);
-    res.send({});
-  });
-
-  app.post("/api/post/image/delete/:key", requireLogin, async (req,res) => {
     const deleteParams = {
       Bucket:keys.Bucket,
-      Key:req.params.key
+      Key:req.body.imageKey
     }
-    s3.deleteObject(deleteParams, (err,data)=>{
-      if (err) {
-        console.log("Delete failed:",err);
-      } else {
-        console.log("Delete success",data);
-      }
+    await s3.deleteObject(deleteParams, function(err,data){
+      if (err) { console.log("Delete failed:",err);}
+      else { console.log("Delete success:",data);}
     });
+    res.send({});
   });
    
   app.get("/api/post/user/get", requireLogin, async (req, res)=>{

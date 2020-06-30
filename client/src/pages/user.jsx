@@ -17,15 +17,15 @@ class UserPage extends Component {
   }
 
   getUserPost = async () => {
-    console.log("getting doc from: /api/post/user/get");
     const doc = await axios.get("/api/post/user/get");
     if (doc.data.err) { return null; }
     console.log(doc.data);
     this.setState({postData:doc.data});
   }
 
-  handleDelete = async (postId) => {
-    await axios.post("/api/post/delete/" + postId);
+  handleDelete = async (postId,imageKey) => {
+    console.log("imageKey:",imageKey);
+    await axios.post("/api/post/delete/"+postId, {imageKey});
     this.getUserPost();
   }
 
@@ -59,7 +59,7 @@ class UserPage extends Component {
                   post={post} 
                   style={{margin:10}} 
                   showDelete={true} 
-                  handleDelete={() => this.handleDelete(post._id)} />
+                  handleDelete={() => this.handleDelete(post._id,post.image)} />
               );
             }
             ) : (
