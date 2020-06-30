@@ -16,12 +16,26 @@ class DetailPage extends Component {
   }
 
   componentDidMount = async () => {
-    const doc = await axios.get("/api/post/getone/" + this.props.match.params.id);
-    const docComment = await axios.get("/api/comment/get/"+doc.data._id);
-    
+    this.getPost();
+    this.getComment();
+  }
+
+  handleDeleteComment = async (commentId) => {
+    await axios.delete("/api/comment/" + commentId);
+    this.getComment();
+  }
+
+  getPost = async () => {
+    const doc = await axios.get("/api/post/getone/" + this.props.match.params.id); 
     this.setState({
       post:doc.data,
-      comments:docComment.data
+    });
+  }
+
+  getComment = async () => {
+    const doc = await axios.get("/api/comment/get/" + this.props.match.params.id);
+    this.setState({
+      comments:doc.data
     });
   }
 
@@ -46,7 +60,7 @@ class DetailPage extends Component {
 
   render() {
     const { post, comments } = this.state;
-    
+    const {currentUser} = this.props;
     // if not logged in don't show comments
     return (
       <div>
@@ -97,8 +111,8 @@ class DetailPage extends Component {
         <Container style={{marginTop:10}}>{this.renderCommentForm()}</Container>
         <Container >
           {
-            comments.length !== 0 ?
-            comments.map(comment => <CommentCard comment={comment} />)
+            currentUser && comments.length !== 0 ?
+            comments.map(comment => <CommentCard handleDeleteComment={(commentId) => this.handleDeleteComment(commentId)} currentUser={currentUser} comment={comment} />)
             :
             null
           }

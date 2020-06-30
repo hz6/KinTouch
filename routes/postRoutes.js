@@ -28,7 +28,6 @@ module.exports = (app) => {
   });
 
   app.post("/api/post/create", requireLogin, async (req,res) => {
-    
     await Post({
       userEmail:req.user.email,
       userName:req.user.username,
@@ -46,6 +45,20 @@ module.exports = (app) => {
     const postId = req.params.id;
     await Post.findByIdAndDelete(postId);
     res.send({});
+  });
+
+  app.post("/api/post/image/delete/:key", requireLogin, async (req,res) => {
+    const deleteParams = {
+      Bucket:keys.Bucket,
+      Key:req.params.key
+    }
+    s3.deleteObject(deleteParams, (err,data)=>{
+      if (err) {
+        console.log("Delete failed:",err);
+      } else {
+        console.log("Delete success",data);
+      }
+    });
   });
    
   app.get("/api/post/user/get", requireLogin, async (req, res)=>{

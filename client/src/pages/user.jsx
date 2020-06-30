@@ -13,6 +13,10 @@ class UserPage extends Component {
   }
 
   componentDidMount = async () => {
+    this.getUserPost();
+  }
+
+  getUserPost = async () => {
     console.log("getting doc from: /api/post/user/get");
     const doc = await axios.get("/api/post/user/get");
     if (doc.data.err) { return null; }
@@ -22,7 +26,7 @@ class UserPage extends Component {
 
   handleDelete = async (postId) => {
     await axios.post("/api/post/delete/" + postId);
-    window.location="/user";
+    this.getUserPost();
   }
 
   renderAvatar(){

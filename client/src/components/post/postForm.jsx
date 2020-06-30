@@ -43,7 +43,6 @@ export default class PostForm extends Component {
       console.log("mongo db save");
       
       // refresh page
-      // or use <Link />
       window.location = "/user";
     }
   }

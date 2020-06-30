@@ -17,6 +17,11 @@ module.exports = (app) => {
     res.send({})
   });
 
+  app.delete("/api/comment/:id" , async(req,res)=>{
+    await Comment.findByIdAndDelete(req.params.id);
+    res.send({});
+  });
+
   app.get("/api/comment/get/:id", async(req,res)=>{
     const comments = await Comment.find({postId:req.params.id});    
     res.send(comments);
