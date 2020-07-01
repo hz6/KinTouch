@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Container, TextField } from "@material-ui/core";
+import { Button, Container, TextField, CircularProgress } from "@material-ui/core";
 import axios from "axios";
 import CardPreview from "../../assets/cardPreview";
 
@@ -10,7 +10,9 @@ export default class PostForm extends Component {
       show:false,
       title:"",
       content:"",
-      file:null
+      file:null,
+      buttonDisabled:false,
+      showProgress:false
     };
   }
 
@@ -21,7 +23,16 @@ export default class PostForm extends Component {
     this.setState({show:!show});
   }
 
+  postButtonControl = () => {
+    const {buttonDisabled,showProgress} = this.state;
+    this.setState({
+      buttonDisabled:!buttonDisabled,
+      showProgress:!showProgress
+    });
+  }
+
   handlePost = async () => {
+    this.postButtonControl();
     const {file,title,content} = this.state;
     // request presigned-url(api) from backend server
     const uploadConfig = await axios.get("/api/image/upload");
@@ -36,6 +47,7 @@ export default class PostForm extends Component {
         },
       });
       console.log("upload image");
+      this.postButtonControl();
     }
     if(title && content){
       // save url to our db
@@ -44,7 +56,9 @@ export default class PostForm extends Component {
       
       // refresh page
       window.location = "/user";
+      this.postButtonControl();
     }
+    this.postButtonControl();
   }
 
   render() {
@@ -59,7 +73,7 @@ export default class PostForm extends Component {
           show ? 
           (<div className="jumbotron row">
             <div className="col-5">
-              <h3>New Post</h3>
+              <h3> New Post </h3>
             <hr/>
             <Container>
               <TextField
@@ -89,9 +103,15 @@ export default class PostForm extends Component {
               />
               <br/>
               <br/>
-              <Button  variant="contained" color="primary" onClick={this.handlePost}>
+              <Button disabled={this.state.buttonDisabled} variant="contained" color="primary" onClick={this.handlePost}>
                 Post
               </Button>
+              {
+                this.state.showProgress ?
+                <CircularProgress/>
+                :
+                null
+              }
             </Container>
             </div>
             <div className="col-7">
