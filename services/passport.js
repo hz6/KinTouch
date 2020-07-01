@@ -19,6 +19,7 @@ passport.use(
     clientID:keys.googleClientID,
     clientSecret:keys.googleClientSecret,
     callbackURL:"/auth/google/callback",
+    proxy:true
   },
   // 这个 callback 函数作用于google-strategy
   async (accessToken, refreshToken, profile, callback)=>{
