@@ -24,7 +24,9 @@ export default class CommentForm extends Component {
     if (content) {
       await Axios.post("/api/comment/create", { content, postId });
       
-      window.location = "/post/" + this.props.postId;
+      // window.location = "/post/" + this.props.postId;
+      this.setState({show:false});
+      this.props.getComment();
     }
   }
 

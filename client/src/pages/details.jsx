@@ -52,7 +52,7 @@ class DetailPage extends Component {
           case null:
             return null;
           default:
-            return <CommentForm postId={post._id} />;
+            return <CommentForm getComment={()=>this.getComment()} postId={post._id} />;
       }
         
     }
