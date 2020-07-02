@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Button, Container, TextField, CircularProgress } from "@material-ui/core";
+import { Button, Container, TextField, CircularProgress, Fab } from "@material-ui/core";
 import axios from "axios";
-import CardPreview from "../../assets/cardPreview";
+import AddIcon from "@material-ui/icons/Add";
+import EditIcon from "@material-ui/icons/Edit"
 
 export default class PostForm extends Component {
   constructor(props){
@@ -62,13 +63,20 @@ export default class PostForm extends Component {
   }
 
   render() {
-    const { show, title, content } = this.state;
-    const postPreview = { title:title,content:content };
+    const { show, title,content } = this.state;
     return (
       <div>
-        <Button variant={show ? "outlined":"contained"} color={show ? "secondary":"primary"} onClick={this.showMainContent}>
-          {show ? "Cancel":"New Post"}
-        </Button>
+        <Container>
+          <Fab className={{height:60,width:60}} variant={show?"extended":"outlined"} color={show? "secondary":"primary"} onClick={this.showMainContent}>
+            {show? 
+            <div>
+              <EditIcon/>
+              Edit your post / Close
+            </div>
+            :
+            <AddIcon/>}
+          </Fab>
+        </Container>
         {
           show ? 
           (<div className="jumbotron row">
@@ -114,13 +122,6 @@ export default class PostForm extends Component {
               }
             </Container>
             </div>
-            <div className="col-7">
-              <p>Preview of your post</p>
-              <CardPreview
-                post={postPreview}
-              />
-            </div>
-            
           </div>):null
         }
       </div>

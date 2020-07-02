@@ -62,7 +62,7 @@ class MainPage extends Component {
             (
               <div>
                 <h4>No posts yet.</h4>
-                <CircularProgress />
+                
               </div>
             )
             }
