@@ -27,3 +27,4 @@
 /node_modules
 /package-lock.json
 /config/dev.js
+/dump.rdb

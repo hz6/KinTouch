@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 
 class Header extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={};
+    this.state = {};
   }
 
-  componentDidMount = () => {}
+  componentDidMount = () => { }
 
   renderHeader = () => {
-    const {currentUser} = this.props;
-    switch (currentUser){
+    const { currentUser } = this.props;
+    switch (currentUser) {
       case (null):
         return null;
       case false:
@@ -43,7 +43,7 @@ class Header extends Component {
   }
 
   render() {
-    
+
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <a className="navbar-brand" href="/">KinTouch</a>
@@ -51,10 +51,12 @@ class Header extends Component {
           <span className="navbar-toggler-icon" ></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-          <ul className="navbar-nav mr-auto mt-2 mt-lg-0">{this.renderHeader()}</ul>
+          <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+            {this.renderHeader()}
+          </ul>
         </div>
       </nav>
-      
+
     )
   }
 }
