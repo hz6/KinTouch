@@ -11,10 +11,10 @@ cache:
   directories:
     - node_modules
     - client/node_modules
-  install:
-    - npm install
-    - npm run build # run frontend
-  script:
-    - nohup npm run start & # run backend
-    - sleep 5
-    - npm run test
+install:
+  - npm install
+  - npm run build # run frontend
+script:
+  - nohup npm run start & # run backend
+  - sleep 5
+  - npm run test
