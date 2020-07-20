@@ -19,7 +19,7 @@ import Dialog from "../assets/dialog";
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
-    margin:5
+    margin: 5
   },
   media: {
     height: 0,
@@ -49,16 +49,16 @@ export default function RecipeReviewCard(props) {
 
   return (
     <Card className={classes.root}>
-      <CardActionArea onClick={()=>{window.location=`post/${props.post._id}`}}>
+      <CardActionArea onClick={() => { window.location = `post/${props.post._id}` }}>
         <CardHeader
-          avatar={<Avatar className={classes.avatar} src={props.post.userPhoto}/>}
+          avatar={<Avatar className={classes.avatar} src={props.post.userPhoto} />}
           title={props.post.title}
           subheader={props.post.createAt}
         />
         <CardMedia
           className={classes.media}
           image={Keys.AWS + props.post.image}
-          title="Paella dish"/>
+          title="Paella dish" />
       </CardActionArea>
 
       <CardActions disableSpacing>
@@ -66,12 +66,12 @@ export default function RecipeReviewCard(props) {
           <FavoriteIcon />
         </IconButton>
         {
-          props.showDelete ? 
-          (
-            <Dialog handleDelete={props.handleDelete} title={"Delete Post"} />
+          props.showDelete ?
+            (
+              <Dialog handleDelete={props.handleDelete} title={"Delete Post"} />
             ) : (
               null
-              )
+            )
         }
         <IconButton
           className={clsx(classes.expand, {
@@ -86,7 +86,7 @@ export default function RecipeReviewCard(props) {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>Details:</Typography>
-            {props.post.content}
+          {props.post.content}
         </CardContent>
       </Collapse>
     </Card>
