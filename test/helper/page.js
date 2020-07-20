@@ -3,6 +3,7 @@ const sessionFactory = require("../factory/session");
 const userFactory = require("../factory/user");
 
 class CustomPage {
+
   constructor(page) {
     this.page = page;
   }
@@ -18,7 +19,6 @@ class CustomPage {
 
     return new Proxy(customPage, {
       get: function (target, property) {
-        console.log("target: ", target);
         return customPage[property] || browser[property] || page[property];
       },
     });
@@ -30,10 +30,10 @@ class CustomPage {
     await this.page.setCookie({ name: "session", value: session });
     await this.page.setCookie({ name: "session.sig", value: sig });
     await this.page.goto("http://localhost:3000");
-    await this.page.waitFor('a[href="/auth/logout"]');
+    await this.page.waitFor("a[href='/auth/logout']");
   }
 
-  async getContentsOf() {
+  async getContentsOf(selector) {
     return this.page.$eval(selector, (ele) => ele.innerHTML);
   }
 }

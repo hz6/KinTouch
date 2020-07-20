@@ -1,4 +1,4 @@
-jest.setTimeout(1000 * 60);
+jest.setTimeout(1000 * 40);
 
 require("../models/user")
 const keys = require("../config/keys")

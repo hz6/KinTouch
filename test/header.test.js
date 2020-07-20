@@ -21,7 +21,7 @@ test("Check Login button", async () => {
 });
 
 test("Google OAuth Login", async () => {
-  await page.click("a.nav-link");
+  await page.goto("http://localhost:3000/auth/google");
   const url = await page.url();
   expect(url).toMatch(/accounts\.google\.com/);
 });
@@ -33,6 +33,7 @@ test("Show Logout Option After Login", async () => {
 })
 
 test("Should show My Posts option", async () => {
-  const text = await page.getContentsOf("a[href='/user']");
+  await page.login();
+  const text = await page.getContentsOf("li a.nav-link");
   expect(text).toEqual("My Posts");
 })

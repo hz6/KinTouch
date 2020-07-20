@@ -5,21 +5,22 @@ const mongoose = require("mongoose");
 const cookieSession = require("cookie-session");
 const keys = require("./config/keys");
 
-const {json}=require("body-parser");
+const { json } = require("body-parser");
 app.use(json());
 
 mongoose.connect(
   keys.mongoURI,
   {
-    useUnifiedTopology:true,
-    useNewUrlParser:true
+    useUnifiedTopology: true,
+    useNewUrlParser: true
   }
 );
 
 app.use(
   cookieSession({
-    maxAge:1000*60*30,
-    keys:[keys.cookieKeys]
+    name: "session",
+    maxAge: 1000 * 60 * 30,
+    keys: [keys.cookieKeys]
   })
 );
 
@@ -46,4 +47,4 @@ if (process.env.NODE_ENV === "production") {
 }
 
 const port = process.env.PORT || 4000;
-app.listen(port,()=>console.log(`Listening to port ${port}`));
+app.listen(port, () => console.log(`Listening to port ${port}`));

@@ -5,5 +5,5 @@ module.exports = () => {
   return new User({
     googleId: "162346479217619380",
     username: "Anthony Zhang"
-  });
+  }).save();
 }
