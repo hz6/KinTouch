@@ -1,20 +1,27 @@
 language: node_js
 node_js:
   - "12" # version of node.js
-dist: trusty
-services: # service needed
+dist: trusty # virtual machine, this is a specific version of linux
+services: # services we need
   - mongodb
   - redis-server
 env:
   - NODE_ENV=ci  PORT=3000
-cache:
+  # tell the running environment
+
+cache: # cache means we ask travis to store those things
   directories:
-    - node_modules
+    - node_modules # travis do not know what is node_modules,
+    # so we need to tell it
     - client/node_modules
-install:
-  - npm install
-  - npm run build # run frontend
+install: # get our application ready on virtual machine for test
+  - npm install # tell travis how to install node_modules
+  - npm run build # build react app
 script:
-  - nohup npm run start & # run backend
-  - sleep 5
-  - npm run test
+  - nohup npm run start &
+  # nohup: if the shell is closed, dont kill anything this command creats
+  # & run this command in a subshell in the background
+  # make more sense, run the server in command, then
+  # you can still work on other things
+  - sleep 3 # wait for 3 seconds to start the server
+  - npm run test # then run the test
