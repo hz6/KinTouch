@@ -1,19 +1,19 @@
-import React, { Component } from "react"
-import {Route, BrowserRouter} from "react-router-dom"
+import React, { Suspense, lazy } from "react"
+import { Route, BrowserRouter } from "react-router-dom"
 import MainPage from "./pages/main";
 import UserPage from "./pages/user";
 import DetailPage from "./pages/details";
 import Header from "./components/partials/header";
 import Footer from "./components/partials/footer";
-import {setCurrentUser} from "./redux/user/actions";
+import { setCurrentUser } from "./redux/user/actions";
 import axios from "axios";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 
-class App extends Component {
-  constructor(props){
+class App extends React.Component {
+  constructor(props) {
     super(props);
-    this.state={
-      name:"hello",
+    this.state = {
+      name: "hello",
     };
   }
 
@@ -23,14 +23,14 @@ class App extends Component {
   }
 
   render() {
-    
+
     return (
       <BrowserRouter>
-        <Header/>
+        <Header />
         <Route exact path="/" component={MainPage} />
         <Route exact path="/user" component={UserPage} />
         <Route path="/post/:id" component={DetailPage} />
-        <Footer/>
+        <Footer />
       </BrowserRouter>
     )
   }
@@ -38,7 +38,7 @@ class App extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   // action名 setCurrentUser
-  setCurrentUser:(user) => {dispatch(setCurrentUser(user));}//dispatch(setCurrentUser)这个setCurrentUser是从上面导入的
+  setCurrentUser: (user) => { dispatch(setCurrentUser(user)); }//dispatch(setCurrentUser)这个setCurrentUser是从上面导入的
 })
 
 // connect(param1--从redux里面拿出数据,param2--向redux里面写入数据)

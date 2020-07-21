@@ -34,7 +34,7 @@ class CustomPage {
   }
 
   async getContentsOf(selector) {
-    return this.page.$eval(selector, (ele) => ele.innerHTML);
+    return await this.page.$eval(selector, (ele) => ele.innerHTML);
   }
 }
 

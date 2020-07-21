@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "12" # version of node.js
+  - "13" # version of node.js
 dist: trusty # virtual machine, this is a specific version of linux
 services:
   - mongodb
