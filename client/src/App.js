@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react"
+import React, { Component } from "react"
 import { Route, BrowserRouter } from "react-router-dom"
 import MainPage from "./pages/main";
 import UserPage from "./pages/user";
@@ -9,7 +9,7 @@ import { setCurrentUser } from "./redux/user/actions";
 import axios from "axios";
 import { connect } from "react-redux";
 
-class App extends React.Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
