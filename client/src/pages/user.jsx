@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import Card from "../assets/card"
-import {connect} from "react-redux";
-import {  CircularProgress, Avatar } from '@material-ui/core';
+import { connect } from "react-redux";
+import { CircularProgress, Avatar } from '@material-ui/core';
 import axios from "axios";
+import Card from "../assets/card"
 
 class UserPage extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
-      postData:[]
+    this.state = {
+      postData: []
     };
   }
 
@@ -20,55 +20,55 @@ class UserPage extends Component {
     const doc = await axios.get("/api/post/user/get");
     if (doc.data.err) { return null; }
     console.log(doc.data);
-    this.setState({postData:doc.data});
+    this.setState({ postData: doc.data });
   }
 
-  handleDelete = async (postId,imageKey) => {
-    console.log("imageKey:",imageKey);
-    await axios.post("/api/post/delete/"+postId, {imageKey});
+  handleDelete = async (postId, imageKey) => {
+    console.log("imageKey:", imageKey);
+    await axios.post("/api/post/delete/" + postId, { imageKey });
     this.getUserPost();
   }
 
-  renderAvatar(){
-    const {currentUser} = this.props;
+  renderAvatar() {
+    const { currentUser } = this.props;
     if (currentUser) {
-      console.log("current user:",currentUser);
-      return <Avatar src={currentUser.image} style={{margin:10, height:130, width:130}} />;
+      console.log("current user:", currentUser);
+      return <Avatar src={currentUser.image} style={{ margin: 10, height: 130, width: 130 }} />;
     } else {
       return <CircularProgress />;
     }
   }
 
   render() {
-    const {postData} = this.state;
-    
+    const { postData } = this.state;
+
     return (
       <div className="col">
-        <div className="row jumbotron" style={{margin:15}}>
+        <div className="row jumbotron" style={{ margin: 15 }}>
           {this.renderAvatar()}
-          <h1 style={{margin:40}}> My Posts </h1>
+          <h1 style={{ margin: 40 }}> My Posts </h1>
         </div>
-        <hr/>
-        <div className="row" style={{margin:10}}>
+        <hr />
+        <div className="row" style={{ margin: 10 }}>
           {
             postData.length !== 0 ?
-            postData.map((post, index) => { 
-              return (
-                <Card 
-                  key={index} 
-                  post={post} 
-                  style={{margin:10}} 
-                  showDelete={true} 
-                  handleDelete={() => this.handleDelete(post._id,post.image)} />
-              );
-            }
-            ) : (
-              <div>
-                <h4>No posts yet.</h4>
-                
-              </div>
-            )
-          }  
+              postData.map((post, index) => {
+                return (
+                  <Card
+                    key={index}
+                    post={post}
+                    style={{ margin: 10 }}
+                    showDelete={true}
+                    handleDelete={() => this.handleDelete(post._id, post.image)} />
+                );
+              }
+              ) : (
+                <div>
+                  <h4>No posts yet.</h4>
+
+                </div>
+              )
+          }
         </div>
       </div>
     )

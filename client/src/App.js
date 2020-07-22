@@ -1,15 +1,15 @@
 import React, { Component, Suspense, lazy } from "react"
 import { Route, BrowserRouter, Switch } from "react-router-dom"
-import Header from "./components/partials/header";
-import Footer from "./components/partials/footer";
 import ErrorBoundary from "./components/errors/ErrorBoundary";
-import ErrorPage from "./components/errors/ErrorPage";
 import { setCurrentUser } from "./redux/user/actions";
 import axios from "axios";
 import { connect } from "react-redux";
+import Header from "./components/partials/header";
+import Footer from "./components/partials/footer";
 const MainPage = lazy(() => import("./pages/main"));
 const UserPage = lazy(() => import("./pages/user"));
 const DetailPage = lazy(() => import("./pages/details"));
+const ErrorPage = lazy(() => import("./components/errors/ErrorPage"));
 
 class App extends Component {
   constructor(props) {
@@ -29,8 +29,8 @@ class App extends Component {
     return (
       <BrowserRouter>
         <ErrorBoundary>
+          <Header />
           <Suspense fallback={<div style={{ margin: 10 }}>Loading ...</div>}>
-            <Header />
             <Switch>
               <Route exact path="/" component={MainPage} />
               <Route exact path="/user" component={UserPage} />

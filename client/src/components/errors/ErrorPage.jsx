@@ -13,4 +13,4 @@ function ErrorPage() {
     </div >
   )
 }
-export default ErrorPage;
+export default React.memo(ErrorPage);
