@@ -1,13 +1,15 @@
-import React, { Component } from "react"
-import { Route, BrowserRouter } from "react-router-dom"
-import MainPage from "./pages/main";
-import UserPage from "./pages/user";
-import DetailPage from "./pages/details";
+import React, { Component, Suspense, lazy } from "react"
+import { Route, BrowserRouter, Switch } from "react-router-dom"
 import Header from "./components/partials/header";
 import Footer from "./components/partials/footer";
+import ErrorBoundary from "./components/errors/ErrorBoundary";
+import ErrorPage from "./components/errors/ErrorPage";
 import { setCurrentUser } from "./redux/user/actions";
 import axios from "axios";
 import { connect } from "react-redux";
+const MainPage = lazy(() => import("./pages/main"));
+const UserPage = lazy(() => import("./pages/user"));
+const DetailPage = lazy(() => import("./pages/details"));
 
 class App extends Component {
   constructor(props) {
@@ -26,11 +28,18 @@ class App extends Component {
 
     return (
       <BrowserRouter>
-        <Header />
-        <Route exact path="/" component={MainPage} />
-        <Route exact path="/user" component={UserPage} />
-        <Route path="/post/:id" component={DetailPage} />
-        <Footer />
+        <ErrorBoundary>
+          <Suspense fallback={<div style={{ margin: 10 }}>Loading ...</div>}>
+            <Header />
+            <Switch>
+              <Route exact path="/" component={MainPage} />
+              <Route exact path="/user" component={UserPage} />
+              <Route path="/post/:id" component={DetailPage} />
+              <Route component={ErrorPage} />
+            </Switch>
+            <Footer />
+          </Suspense>
+        </ErrorBoundary>
       </BrowserRouter>
     )
   }
