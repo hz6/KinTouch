@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RecipeReviewCard(props) {
+function RecipeReviewCard(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const handleExpandClick = () => {
@@ -58,7 +58,7 @@ export default function RecipeReviewCard(props) {
         <CardMedia
           className={classes.media}
           image={Keys.AWS + props.post.image}
-          title="Paella dish" />
+          title="Post Image" />
       </CardActionArea>
 
       <CardActions disableSpacing>
@@ -92,3 +92,4 @@ export default function RecipeReviewCard(props) {
     </Card>
   );
 }
+export default React.memo(RecipeReviewCard);

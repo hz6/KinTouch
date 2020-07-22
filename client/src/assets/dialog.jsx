@@ -49,7 +49,7 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions);
 
-export default function CustomizedDialogs(props) {
+function CustomizedDialogs(props) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -86,3 +86,4 @@ export default function CustomizedDialogs(props) {
     </div>
   );
 }
+export default React.memo(CustomizedDialogs);
