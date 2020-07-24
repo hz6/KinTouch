@@ -50,7 +50,7 @@ class MainPage extends Component {
                   <div className="row" >
                     {
                       allPosts !== undefined && allPosts.length !== 0 ?
-                        allPosts.map((post, index) => {
+                        allPosts.reverse().map((post, index) => {
                           return <Card key={index} post={post} showDelete={false} />
                         })
                         :

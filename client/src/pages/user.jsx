@@ -51,8 +51,8 @@ class UserPage extends Component {
         <hr />
         <div className="row" style={{ margin: 10 }}>
           {
-            postData.length !== 0 ?
-              postData.map((post, index) => {
+            postData !== undefined && postData.length !== 0 ?
+              postData.reverse().map((post, index) => {
                 return (
                   <Card
                     key={index}
