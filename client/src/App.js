@@ -46,9 +46,7 @@ class App extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  // action名 setCurrentUser
-  setCurrentUser: (user) => { dispatch(setCurrentUser(user)); }//dispatch(setCurrentUser)这个setCurrentUser是从上面导入的
+  setCurrentUser: (user) => { dispatch(setCurrentUser(user)); }
 })
 
-// connect(param1--从redux里面拿出数据,param2--向redux里面写入数据)
 export default connect(null, mapDispatchToProps)(App);
