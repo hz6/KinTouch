@@ -37,8 +37,8 @@ class App extends Component {
               <Route path="/post/:id" component={DetailPage} />
               <Route component={ErrorPage} />
             </Switch>
-            <Footer />
           </Suspense>
+          <Footer />
         </ErrorBoundary>
       </BrowserRouter>
     )
