@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { CircularProgress, Avatar } from '@material-ui/core';
-import axios from "axios";
 import Card from "../assets/card"
+import * as actions from "../actions";
+import { selectCurrentUser } from "../selectors/user";
+import { selectUserPosts } from "../selectors/post";
+import { createStructuredSelector } from "reselect";
 
 class UserPage extends Component {
   constructor(props) {
@@ -13,26 +16,23 @@ class UserPage extends Component {
   }
 
   componentDidMount = async () => {
-    this.getUserPost();
+    await this.getUserPost();
   }
 
   getUserPost = async () => {
-    const doc = await axios.get("/api/post/user/get");
-    if (doc.data.err) { return null; }
-    console.log(doc.data);
-    this.setState({ postData: doc.data });
+    await this.props.GetUserPosts();
+    this.setState({ postData: this.props.userPosts });
   }
 
   handleDelete = async (postId, imageKey) => {
     console.log("imageKey:", imageKey);
-    await axios.post("/api/post/delete/" + postId, { imageKey });
-    this.getUserPost();
+    await this.props.DeleteUserPost(postId, imageKey);
+    await this.getUserPost();
   }
 
   renderAvatar() {
     const { currentUser } = this.props;
     if (currentUser) {
-      console.log("current user:", currentUser);
       return <Avatar src={currentUser.image} style={{ margin: 10, height: 130, width: 130 }} />;
     } else {
       return <CircularProgress />;
@@ -75,8 +75,9 @@ class UserPage extends Component {
   }
 }
 
-const mapStatesToProps = (state) => ({
-  currentUser: state.user.currentUser
+const mapStatesToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  userPosts: selectUserPosts,
 })
 
-export default connect(mapStatesToProps)(UserPage);
+export default connect(mapStatesToProps, actions)(UserPage);

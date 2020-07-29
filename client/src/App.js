@@ -1,9 +1,6 @@
 import React, { Component, Suspense, lazy } from "react"
 import { Route, BrowserRouter, Switch } from "react-router-dom"
 import ErrorBoundary from "./components/errors/ErrorBoundary";
-import { setCurrentUser } from "./redux/user/actions";
-import axios from "axios";
-import { connect } from "react-redux";
 import Header from "./components/partials/header";
 import Footer from "./components/partials/footer";
 const MainPage = lazy(() => import("./pages/main"));
@@ -14,15 +11,10 @@ const ErrorPage = lazy(() => import("./components/errors/ErrorPage"));
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      name: "hello",
-    };
+    this.state = {};
   }
 
-  componentDidMount = async () => {
-    const user = await axios.get("/auth/current_user");
-    this.props.setCurrentUser(user.data);
-  }
+  componentDidMount = async () => { }
 
   render() {
 
@@ -45,8 +37,4 @@ class App extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  setCurrentUser: (user) => { dispatch(setCurrentUser(user)); }
-})
-
-export default connect(null, mapDispatchToProps)(App);
+export default App;

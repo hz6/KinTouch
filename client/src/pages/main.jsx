@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import NoUserHeader from "../components/main/noUserHeader";
 import UserHeader from "../components/main/userHeader";
 import { connect } from "react-redux";
-import axios from 'axios';
 import { CircularProgress, Container } from '@material-ui/core';
 import Card from "../assets/card";
+import * as actions from "../actions";
+import { selectCurrentUser } from "../selectors/user";
+import { selectAllPosts } from "../selectors/post";
+import { createStructuredSelector } from "reselect";
 
 class MainPage extends Component {
   constructor(props) {
@@ -14,13 +17,9 @@ class MainPage extends Component {
     };
   }
 
-  componentDidMount = () => {
-    this.getAllPosts();
-  }
-
-  getAllPosts = async () => {
-    const doc = await axios.get("/api/post/all/get");
-    this.setState({ allPosts: doc.data });
+  componentDidMount = async () => {
+    await this.props.GetAllPosts();
+    this.setState({ allPosts: this.props.allPosts });
   }
 
   renderHeader = () => {
@@ -75,8 +74,9 @@ class MainPage extends Component {
   }
 }
 
-const mapStatesToProps = (state) => ({
-  currentUser: state.user.currentUser
+const mapStatesToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  allPosts: selectAllPosts,
 })
 
-export default connect(mapStatesToProps)(MainPage);
+export default connect(mapStatesToProps, actions)(MainPage);

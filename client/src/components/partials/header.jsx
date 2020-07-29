@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
+import * as actions from "../../actions";
+import { selectCurrentUser } from "../../selectors/user";
+import { createStructuredSelector } from "reselect";
 
 class Header extends Component {
   constructor(props) {
@@ -7,7 +10,9 @@ class Header extends Component {
     this.state = {};
   }
 
-  componentDidMount = () => { }
+  componentDidMount = async () => {
+    await this.props.SetCurrentUser();
+  }
 
   renderHeader = () => {
     const { currentUser } = this.props;
@@ -33,7 +38,12 @@ class Header extends Component {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" style={{ marginLeft: 10, marginRight: 10 }} href="/auth/logout">
+              <a className="nav-link" style={{ marginLeft: 10, marginRight: 10 }} href="/auth/logout"
+                onClick={
+                  () => {
+                    this.props.UserLogOut();
+                    window.location = "/"
+                  }}>
                 Logout
               </a>
             </li>
@@ -63,8 +73,8 @@ class Header extends Component {
   }
 }
 
-const mapStatesToProps = (state) => ({
-  currentUser: state.user.currentUser
+const mapStatesToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
 })
 
-export default connect(mapStatesToProps)(Header);
+export default connect(mapStatesToProps, actions)(Header);

@@ -5,6 +5,11 @@ import Keys from "../assets/keys";
 import CommentForm from "../components/comment/commentForm";
 import {connect} from "react-redux";
 import CommentCard from "../components/comment/commentCard";
+import * as actions from "../actions";
+import { selectCurrentUser } from "../selectors/user";
+import { selectCurrentPost } from "../selectors/post";
+import { selectCurrentComments } from "../selectors/comment";
+import { createStructuredSelector } from "reselect";
 
 class DetailPage extends Component {
   constructor(props){
@@ -16,26 +21,27 @@ class DetailPage extends Component {
   }
 
   componentDidMount = async () => {
-    this.getPost();
-    this.getComment();
+    await this.getCurrentPost();
+    await this.getComment();
   }
 
   handleDeleteComment = async (commentId) => {
-    await axios.delete("/api/comment/" + commentId);
-    this.getComment();
+    // await axios.delete("/api/comment/" + commentId);
+    await this.props.DeleteComment(commentId);
+    await this.getComment();
   }
 
-  getPost = async () => {
-    const doc = await axios.get("/api/post/getone/" + this.props.match.params.id); 
+  getCurrentPost = async () => {
+    await this.props.SetCurrentPost(this.props.match.params.id); 
     this.setState({
-      post:doc.data,
+      post:this.props.currentPost,
     });
   }
 
   getComment = async () => {
-    const doc = await axios.get("/api/comment/get/" + this.props.match.params.id);
+    await this.props.GetCurrentComments(this.props.match.params.id)
     this.setState({
-      comments:doc.data
+      comments:this.props.currentComments,
     });
   }
 
@@ -112,7 +118,7 @@ class DetailPage extends Component {
         <Container >
           {
             currentUser && comments.length !== 0 ?
-            comments.map(comment => <CommentCard handleDeleteComment={(commentId) => this.handleDeleteComment(commentId)} currentUser={currentUser} comment={comment} />)
+            comments.map((comment,index) => <CommentCard key={index} handleDeleteComment={(commentId) => this.handleDeleteComment(commentId)} currentUser={currentUser} comment={comment} />)
             :
             null
           }
@@ -121,8 +127,10 @@ class DetailPage extends Component {
     )
   }
 }
-const mapStatesToProps = (state) => ({
-  currentUser: state.user.currentUser
+const mapStatesToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  currentPost: selectCurrentPost,
+  currentComments: selectCurrentComments,
 })
 
-export default connect(mapStatesToProps)(DetailPage);
+export default connect(mapStatesToProps,actions)(DetailPage);

@@ -1,0 +1,15 @@
+export const UserActionTypes = {
+  SET_CURRENT_USER: "SET_CURRENT_USER",
+};
+
+export const PostsActionTypes = {
+  SET_ALL_POST: "SET_ALL_POST",
+  SET_USER_POST: "SET_USER_POST",
+  DELETE_USER_PORT: "DELETE_USER_PORT",
+  SET_CURRENT_POST: "SET_CURRENT_POST",
+};
+
+export const CommentsActionTypes = {
+  SET_CURRENT_COMMENTS: "SET_CURRENT_COMMENTS",
+  DELETE_COMMENT: "DELETE_COMMENT"
+};
