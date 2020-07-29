@@ -23,7 +23,7 @@ class Header extends Component {
         return (
           <div className="row">
             <li className="nav-item active">
-              <a className="nav-link" href="/auth/google">
+              <a className="nav-link" style={{ marginLeft: 10, marginRight: 10 }} href="/auth/google">
                 Login
               </a>
             </li>
