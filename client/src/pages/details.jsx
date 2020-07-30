@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import axios from "axios";
 import {Card, CardContent, Avatar, Typography, CircularProgress, Container} from "@material-ui/core";
 import Keys from "../assets/keys";
 import CommentForm from "../components/comment/commentForm";
