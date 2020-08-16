@@ -7,13 +7,13 @@ I created this app for the sake of sharing life experience. Everyone in this com
 
 1. Frontend: React, Redux
 2. Backend: NodeJS, ExpressJS
-3. Database: MongoDB
+3. Database: MongoDB, AWS S3
 4. Dev tools: VS code, Postman, Material-UI, Bootstrap-4 
 
 ## Function:
 
 1. Upload photo and text content
-2. Comment on current post
+2. Comment on current posts
 
 ## Deployment
 
