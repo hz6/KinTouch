@@ -49,7 +49,7 @@ function RecipeReviewCard(props) {
 
   return (
     <Card className={classes.root}>
-      <CardActionArea onClick={() => { window.location = `post/${props.post._id}` }}>
+      <CardActionArea onClick={() => { window.location = `/post/${props.post._id}` }}>
         <CardHeader
           avatar={<Avatar className={classes.avatar} src={props.post.userPhoto} />}
           title={props.post.title}

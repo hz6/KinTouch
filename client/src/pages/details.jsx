@@ -65,7 +65,7 @@ class DetailPage extends Component {
 
   render() {
     const { post, comments } = this.state;
-    const {currentUser} = this.props;
+    const { currentUser } = this.props;
     // if not logged in don't show comments
     return (
       <div>

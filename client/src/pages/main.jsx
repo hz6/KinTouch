@@ -61,15 +61,12 @@ class MainPage extends Component {
                 (
                   <div>
                     <h4>No posts yet.</h4>
-
                   </div>
                 )
             }
           </Container>
-
         </div>
       </div>
-
     )
   }
 }

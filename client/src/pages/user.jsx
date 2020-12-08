@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { CircularProgress, Avatar } from '@material-ui/core';
+import { Avatar } from '@material-ui/core';
+import Skeleton from "@material-ui/lab/Skeleton";
 import Card from "../assets/card"
 import * as actions from "../actions";
 import { selectCurrentUser } from "../selectors/user";
@@ -20,8 +21,12 @@ class UserPage extends Component {
   }
 
   getUserPost = async () => {
-    await this.props.GetUserPosts();
-    this.setState({ postData: this.props.userPosts });
+    if (this.props.currentUser) {
+      await this.props.GetUserPosts();
+      this.setState({ postData: this.props.userPosts });
+    } else {
+      this.setState({ postData: []})
+    }
   }
 
   handleDelete = async (postId, imageKey) => {
@@ -35,18 +40,17 @@ class UserPage extends Component {
     if (currentUser) {
       return <Avatar src={currentUser.image} style={{ margin: 10, height: 130, width: 130 }} />;
     } else {
-      return <CircularProgress />;
+      return <Skeleton style={{ margin: 30 }} variant="circle" width={55} height={55} />;
     }
   }
 
   render() {
     const { postData } = this.state;
-
     return (
       <div className="col">
         <div className="row jumbotron" style={{ margin: 15 }}>
           {this.renderAvatar()}
-          <h1 style={{ margin: 40 }}> My Posts </h1>
+          <h1 style={{ margin: 30 }}> My Posts </h1>
         </div>
         <hr />
         <div className="row" style={{ margin: 10 }}>
@@ -64,8 +68,7 @@ class UserPage extends Component {
               }
               ) : (
                 <div>
-                  <h4>No posts yet.</h4>
-
+                  <h4>No posts found.</h4>
                 </div>
               )
           }
