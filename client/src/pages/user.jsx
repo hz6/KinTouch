@@ -17,16 +17,14 @@ class UserPage extends Component {
   }
 
   componentDidMount = async () => {
-    await this.getUserPost();
+    if (this.props.currentUser) {
+      await this.getUserPost();
+    }
   }
 
   getUserPost = async () => {
-    if (this.props.currentUser) {
-      await this.props.GetUserPosts();
-      this.setState({ postData: this.props.userPosts });
-    } else {
-      this.setState({ postData: []})
-    }
+    await this.props.GetUserPosts();
+    this.setState({ postData: this.props.userPosts });
   }
 
   handleDelete = async (postId, imageKey) => {
