@@ -22,6 +22,12 @@ module.exports = (app) => {
     res.send({});
   });
 
+  app.delete("/api/comment/post/:id", async (req, res) => {
+    const postId = req.params.id;
+    await Comment.deleteMany({ postId: postId });
+    res.send({})
+  });
+
   app.get("/api/comment/get/:id", async (req, res) => {
     const comments = await Comment.find({ postId: req.params.id });
     res.send(comments);

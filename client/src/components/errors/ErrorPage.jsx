@@ -1,7 +1,7 @@
 import React from 'react'
 import Skeleton from "@material-ui/lab/Skeleton";
 
-function ErrorPage() {
+const ErrorPage = () => {
   return (
     <div className="jumbotron" style={{ margin: 20 }}>
       <h1 style={{ marginBottom: 10 }}>404: Page not Found</h1>

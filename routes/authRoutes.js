@@ -15,15 +15,15 @@ module.exports = (app) => {
     "/auth/google/callback",
     passport.authenticate("google"),
     (req, res) => {
-      // res.redirect("http://localhost:3000/");
-      res.redirect("/");
+      res.redirect("http://localhost:3000/");
+      // res.redirect("/");
     }
   );
 
   app.get(
-    "/auth/current_user",
+    "/auth/current-user",
     (req, res) => {
-      console.log("auth/current_user", req.user);
+      console.log("CURRENT USER:", req.user);
       res.send(req.user);
     }
   );
@@ -32,8 +32,8 @@ module.exports = (app) => {
     "/auth/logout",
     (req, res) => {
       req.logout();
-      // res.redirect("http://localhost:3000/");
-      res.redirect("/");
+      res.redirect("http://localhost:3000/");
+      // res.redirect("/");
     }
   )
 }

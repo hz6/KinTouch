@@ -4,7 +4,7 @@ import Axios from "axios";
 // USER ACTIONS
 export const SetCurrentUser = () => async (dispatch) => {
   console.log("Google sign in");
-  const user = await Axios.get("/auth/current_user");
+  const user = await Axios.get("/auth/current-user");
   dispatch({ type: UserActionTypes.SET_CURRENT_USER, payload: user.data });
 };
 
@@ -27,6 +27,7 @@ export const GetUserPosts = () => async (dispatch) => {
 
 export const DeleteUserPost = (id, imageKey) => async (dispatch) => {
   await Axios.post("/api/post/delete/" + id, { imageKey });
+  await Axios.delete("/api/comment/post/" + id);
 };
 
 export const SetCurrentPost = (id) => async (dispatch) => {

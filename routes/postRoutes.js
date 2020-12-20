@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const keys = require("../config/keys");
 const AWS = require("aws-sdk");
 const Post = mongoose.model("posts");
-const Comment = mongoose.model("comments");
 const requireLogin = require("../middlewares/requireLogin");
 const cleanCache = require("../middlewares/cleanCache");
 const uuid = require("uuid/v1");
@@ -46,12 +45,11 @@ module.exports = (app) => {
   app.post("/api/post/delete/:id", requireLogin, cleanCache, async (req, res) => {
     const postId = req.params.id;
     await Post.findByIdAndDelete(postId);
-    await Comment.deleteMany({ postId: postId })
     const deleteParams = {
       Bucket: keys.Bucket,
       Key: req.body.imageKey
     }
-    await s3.deleteObject(deleteParams, function (err, data) {
+    await s3.deleteObject(deleteParams, (err, data) => {
       if (err) { console.log("Delete failed:", err); }
       else { console.log("Delete success:", data); }
     });
