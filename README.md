@@ -13,7 +13,7 @@ I created this app for the sake of sharing life experience. Everyone in this com
 ## Function:
 
 1. Upload photo and text content
-2. Comment on current posts
+2. Comment on existing posts
 
 ## Deployment
 
