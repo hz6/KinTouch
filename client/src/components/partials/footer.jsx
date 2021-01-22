@@ -1,9 +1,10 @@
 import React from "react";
 
-export default () => {
+const Footer = () => {
   return (
-    <div style={{ marginTop: 40, height: 10 }}>
+    <div style={{ marginTop: 40, height: 40 }}>
 
     </div>
   );
 }
+export default Footer;
