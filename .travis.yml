@@ -4,7 +4,7 @@ node_js:
 dist: trusty # virtual machine, this is a specific version of linux
 services:
   - mongodb
-  - redis-server
+  - redis
 env:
   - NODE_ENV=ci  PORT=3000
 
