@@ -20,7 +20,7 @@ function MediaCard(props) {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root} style={{ marginTop: 10, width: "90%" }}>
+    <Card className={classes.root} style={{ marginTop: 10, width: "90%", background: '#FFB6CE' }}>
       <CardContent>
         <div className="row">
           <Avatar style={{ marginLeft: 15 }} src={props.comment.userPhoto} />

@@ -6,8 +6,8 @@ const UserHeader = (props) => {
 
 
   return (
-    <div className="jumbotron">
-      <Card>
+    <div style={{ background: '#FFC0CB' }} className="jumbotron">
+      <Card style={{ background: "#DC143C" }}>
         <CardContent>
           <div className="row">
 
@@ -19,10 +19,10 @@ const UserHeader = (props) => {
             </div>
 
             <div className="col-9">
-              <Typography style={{ margin: 5 }}>
+              <Typography style={{ margin: 5, color: "#FFC0CB" }}>
                 Name: {props.currentUser.username}
               </Typography>
-              <Typography style={{ margin: 5 }}>
+              <Typography style={{ margin: 5, color: "#FFC0CB" }}>
                 Email: {props.currentUser.email}
               </Typography>
             </div>

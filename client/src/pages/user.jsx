@@ -48,7 +48,7 @@ class UserPage extends Component {
     const { postData, loading } = this.state;
     return (
       <div className="col">
-        <div className="row jumbotron" style={{ margin: 15 }}>
+        <div className="row jumbotron" style={{ margin: 15, background: '#FFB6C1' }}>
           {this.renderAvatar()}
           <h1 style={{ margin: 30 }}> My Posts </h1>
         </div>

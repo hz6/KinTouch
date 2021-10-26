@@ -39,7 +39,7 @@ class MainPage extends Component {
   render() {
     const { allPosts, loading } = this.state;
     return (
-      <div>
+      <>
         <div className="col-12" style={{ marginTop: 10 }}>
           {this.renderHeader()}
         </div>
@@ -61,7 +61,7 @@ class MainPage extends Component {
             }
           </Container>
         </div>
-      </div>
+      </>
     )
   }
 }

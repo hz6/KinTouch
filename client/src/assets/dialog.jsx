@@ -78,7 +78,7 @@ function CustomizedDialogs(props) {
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={deleteAndClose} color="primary" variant="outlined">
+          <Button autoFocus onClick={deleteAndClose} color="secondary" variant="outlined">
             Confirm
           </Button>
         </DialogActions>

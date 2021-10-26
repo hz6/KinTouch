@@ -15,6 +15,7 @@ import { CardActionArea, Collapse } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Keys from "../assets/keys";
 import Dialog from "../assets/dialog";
+import moment from 'moment';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function RecipeReviewCard(props) {
+const RecipeReviewCard = (props) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const handleExpandClick = () => {
@@ -48,30 +49,29 @@ function RecipeReviewCard(props) {
   };
 
   return (
-    <Card style={{ backgroundColor: '#F5F5F5' }} className={classes.root}>
-      <CardActionArea onClick={() => { window.location = `/post/${props.post._id}` }}>
+    <Card style={{ backgroundColor: '#FFC0CB' }} className={classes.root}>
+      <CardActionArea onClick={() => window.location = `/post/${props.post._id}`}>
         <CardHeader
           avatar={<Avatar className={classes.avatar} src={props.post.userPhoto} />}
           title={props.post.title}
-          subheader={props.post.createAt}
+          subheader={moment(props.post.createAt).format('llll')}
         />
         <CardMedia
           className={classes.media}
           image={Keys.AWS + props.post.image}
-          title="Post Image" />
+          title="Post Image"
+        />
       </CardActionArea>
 
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+          <FavoriteIcon color="secondary" />
         </IconButton>
         {
           props.showDelete ?
-            (
-              <Dialog handleDelete={props.handleDelete} title={"Delete Post"} />
-            ) : (
-              null
-            )
+            <Dialog handleDelete={props.handleDelete} title={"Delete Post"} />
+            :
+            null
         }
         <IconButton
           className={clsx(classes.expand, {
@@ -85,8 +85,7 @@ function RecipeReviewCard(props) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Details:</Typography>
-          {props.post.content}
+          <Typography>{props.post.content}</Typography>
         </CardContent>
       </Collapse>
     </Card>

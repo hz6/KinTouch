@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, CardContent, Avatar, Typography, CircularProgress, Container } from "@material-ui/core";
+import { Card, CardContent, Avatar, Typography, CircularProgress, Container, LinearProgress } from "@material-ui/core";
 import Keys from "../assets/keys";
 import CommentForm from "../components/comment/commentForm";
 import { connect } from "react-redux";
@@ -23,6 +23,7 @@ class DetailPage extends Component {
 
   componentDidMount = async () => {
     console.log(this.props.match.path);
+    console.log(this.props);
     await this.getCurrentPost();
     await this.getComment();
   }
@@ -74,10 +75,10 @@ class DetailPage extends Component {
     // if not logged in don't show comments
     return (
       <div>
-        <div className="jumbotron" style={{ margin: 10 }}>
-          <Card>
+        <div className="jumbotron" style={{ margin: 10, background: '#FFB6CE' }}>
+          <Card style={{ background: '#DC143C' }}>
             <CardContent>
-              <div className="row">
+              <div className="row" >
                 <div className="col-3">
                   {
                     post ?
@@ -87,15 +88,15 @@ class DetailPage extends Component {
                   }
                 </div>
                 <div className="col-9">
-                  <Typography style={{ margin: 10 }}>
+                  <Typography style={{ margin: 10, color: '#FFC0CB' }}>
                     {
                       postLoading ?
-                        <CircularProgress />
+                        <LinearProgress color="secondary" />
                         :
                         post ?
-                          (<h3>{post.userName}'s post</h3>)
+                          <h3>{post.userName}'s post</h3>
                           :
-                          (<h3>Oops! post not found</h3>)
+                          ""
                     }
                   </Typography>
                 </div>
@@ -108,7 +109,7 @@ class DetailPage extends Component {
             <CircularProgress />
             :
             post ?
-              (<Card style={{ margin: 10 }}>
+              <Card style={{ margin: 10, background: '#FFB6CE' }}>
                 <Container>
                   <img alt="" src={Keys.AWS + post.image} style={{ width: "90%", marginTop: 20 }} />
                 </Container>
@@ -120,9 +121,9 @@ class DetailPage extends Component {
                     {post.content}
                   </Typography>
                 </CardContent>
-              </Card>)
+              </Card>
               :
-              (<CircularProgress />)
+              <CircularProgress />
         }
         <Container style={{ marginTop: 10 }}>{this.renderCommentForm()}</Container>
         <Container >

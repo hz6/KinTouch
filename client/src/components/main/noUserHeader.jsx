@@ -3,7 +3,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 
 const NoUserHeader = () => {
   return (
-    <div className="jumbotron">
+    <div className="jumbotron" style={{ background: '#FFC0CB' }}>
       <h1 style={{ marginBottom: 10 }}> Hello, Welcome to KinTouch </h1>
       <hr />
       <div className="row">

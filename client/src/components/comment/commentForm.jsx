@@ -25,7 +25,7 @@ class CommentForm extends Component {
       await Axios.post("/api/comment/create", { content, postId });
 
       // window.location = "/post/" + this.props.postId;
-      this.setState({ show: false });
+      this.setState({ show: false, content: '' });
       this.props.getComment();
     }
   }
@@ -34,12 +34,12 @@ class CommentForm extends Component {
     const { show, content } = this.state;
     return (
       <div>
-        <Button variant={show ? "outlined" : "contained"} color={show ? "secondary" : "primary"} onClick={this.showMainContent}>
+        <Button variant={show ? "outlined" : "contained"} color="secondary" onClick={this.showMainContent}>
           {show ? "Close Comment" : "Leave A Comment"}
         </Button>
         {
           show ?
-            (<div className="jumbotron row">
+            <div className="jumbotron row" style={{ background: '#FFB6CE' }}>
               <div className="col-5">
                 <h3> New Comment </h3>
                 <hr />
@@ -50,12 +50,12 @@ class CommentForm extends Component {
                     style={{ width: 300 }} value={content} onChange={(event) => this.setState({ content: event.target.value })}
                   />
                   <br />
-                  <Button variant="contained" color="primary" onClick={this.handleComment} style={{ marginTop: 10 }}>
+                  <Button variant="contained" color="secondary" onClick={this.handleComment} style={{ marginTop: 10 }}>
                     Post Comment
-                </Button>
+                  </Button>
                 </Container>
               </div>
-            </div>) : null
+            </div> : null
         }
       </div>
     )

@@ -67,25 +67,24 @@ class PostForm extends Component {
     return (
       <div>
         <Container>
-          <Fab className={{ height: 60, width: 60 }} variant={show ? "extended" : "outlined"} color={show ? "secondary" : "primary"} onClick={this.showMainContent}>
+          <Fab style={{ background: '#DC143C', height: 55 }} variant={show ? "extended" : "outlined"} color={show ? "secondary" : "primary"} onClick={this.showMainContent}>
             {show ?
               <div>
                 <EditIcon />
-              Edit your post / Close
-            </div>
+                Edit your post / Close
+              </div>
               :
               <AddIcon />}
           </Fab>
         </Container>
         {
           show ?
-            (<div className="jumbotron row">
+            (<div style={{ background: '#FFB6CE' }} className="jumbotron row">
               <div className="col-5">
                 <h3> New Post </h3>
                 <hr />
                 <Container>
                   <TextField
-                    id="standard-basic"
                     label="Title"
                     style={{ width: 300 }}
                     value={title}
@@ -111,9 +110,9 @@ class PostForm extends Component {
                   />
                   <br />
                   <br />
-                  <Button disabled={this.state.buttonDisabled} variant="contained" color="primary" onClick={this.handlePost}>
+                  <Button disabled={this.state.buttonDisabled} variant="contained" color="secondary" onClick={this.handlePost}>
                     Post
-              </Button>
+                  </Button>
                   {
                     this.state.showProgress ?
                       <CircularProgress />
