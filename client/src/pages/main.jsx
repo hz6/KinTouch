@@ -13,13 +13,15 @@ class MainPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      allPosts: []
+      allPosts: [],
+      loading: false
     };
   }
 
   componentDidMount = async () => {
+    this.setState({ loading: true });
     await this.props.GetAllPosts();
-    this.setState({ allPosts: this.props.allPosts });
+    this.setState({ allPosts: this.props.allPosts, loading: false });
   }
 
   renderHeader = () => {
@@ -35,7 +37,7 @@ class MainPage extends Component {
   }
 
   render() {
-    const { allPosts } = this.state;
+    const { allPosts, loading } = this.state;
     return (
       <div>
         <div className="col-12" style={{ marginTop: 10 }}>
@@ -44,25 +46,18 @@ class MainPage extends Component {
         <div>
           <Container>
             {
-              allPosts.length !== 0 ?
-                (
-                  <div className="row" >
-                    {
-                      allPosts !== undefined && allPosts.length !== 0 ?
-                        allPosts.reverse().map((post, index) => {
-                          return <Card key={index} post={post} showDelete={false} />
-                        })
-                        :
-                        (<CircularProgress />)
-                    }
-                  </div>
-                )
+              loading ? <CircularProgress />
                 :
-                (
-                  <div>
-                    <h4>No posts yet.</h4>
-                  </div>
-                )
+                allPosts.length !== 0 ?
+                  (
+                    <div className="row" >
+                      {
+                        allPosts.reverse().map((post, index) =>
+                          <Card key={index} post={post} showDelete={false} />
+                        )
+                      }
+                    </div>
+                  ) : <h4>No posts yet.</h4>
             }
           </Container>
         </div>

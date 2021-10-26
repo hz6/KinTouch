@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { Avatar } from '@material-ui/core';
+import { Avatar, CircularProgress } from '@material-ui/core';
 import Skeleton from "@material-ui/lab/Skeleton";
 import Card from "../assets/card"
 import * as actions from "../actions";
@@ -12,25 +12,27 @@ class UserPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      postData: []
+      postData: [],
+      loading: false
     };
   }
 
   componentDidMount = async () => {
     if (this.props.currentUser) {
-      await this.getUserPost();
+      await this.getUserPosts();
     }
   }
 
-  getUserPost = async () => {
+  getUserPosts = async () => {
+    this.setState({ loading: true })
     await this.props.GetUserPosts();
-    this.setState({ postData: this.props.userPosts });
+    this.setState({ postData: this.props.userPosts, loading: false });
   }
 
   handleDelete = async (postId, imageKey) => {
     console.log("imageKey:", imageKey);
     await this.props.DeleteUserPost(postId, imageKey);
-    await this.getUserPost();
+    await this.getUserPosts();
   }
 
   renderAvatar() {
@@ -43,7 +45,7 @@ class UserPage extends Component {
   }
 
   render() {
-    const { postData } = this.state;
+    const { postData, loading } = this.state;
     return (
       <div className="col">
         <div className="row jumbotron" style={{ margin: 15 }}>
@@ -53,22 +55,13 @@ class UserPage extends Component {
         <hr />
         <div className="row" style={{ margin: 10 }}>
           {
-            postData !== undefined && postData.length !== 0 ?
-              postData.reverse().map((post, index) => {
-                return (
-                  <Card
-                    key={index}
-                    post={post}
-                    style={{ margin: 10 }}
-                    showDelete={true}
-                    handleDelete={() => this.handleDelete(post._id, post.image)} />
-                );
-              }
-              ) : (
-                <div>
-                  <h4>No posts found.</h4>
-                </div>
-              )
+            loading ?
+              <CircularProgress />
+              :
+              postData.length !== 0 ?
+                postData.reverse().map((post, index) => <Card key={index} post={post} style={{ margin: 10 }} showDelete={true} handleDelete={() => this.handleDelete(post._id, post.image)} />)
+                :
+                <h4>No posts found.</h4>
           }
         </div>
       </div>
